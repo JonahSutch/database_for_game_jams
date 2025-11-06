@@ -1,0 +1,40 @@
+<div class="form-container">
+    <form id="add-game-tool-form" method="POST" action="/game-tools/add">
+        <div class="form-group">
+            <label for="gameID">Game: <span class="required">*</span></label>
+            <select id="gameID" name="gameID" required>
+                <option value="">-- Select a Game --</option>
+                {{#each games}}
+                <option value="{{this.gameID}}">{{this.gameTitle}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="toolID">Tool: <span class="required">*</span></label>
+            <select id="toolID" name="toolID" required>
+                <option value="">-- Select a Tool --</option>
+                {{#each tools}}
+                <option value="{{this.toolID}}">{{this.toolName}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <input type="text" id="notes" name="notes" maxlength="255" placeholder="e.g., Used for level design">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Game Tool</button>
+            <a href="/game-tools" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('add-game-tool-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submission will be implemented in Step 4');
+});
+</script>

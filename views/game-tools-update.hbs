@@ -1,0 +1,40 @@
+<div class="form-container">
+    <form id="update-game-tool-form" method="POST" action="/game-tools/update/{{gameTool.gameToolID}}">
+        <input type="hidden" name="gameToolID" value="{{gameTool.gameToolID}}">
+
+        <div class="form-group">
+            <label for="gameID">Game: <span class="required">*</span></label>
+            <select id="gameID" name="gameID" required>
+                {{#each games}}
+                <option value="{{this.gameID}}" {{#if (eq this.gameID ../gameTool.gameID)}}selected{{/if}}>{{this.gameTitle}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="toolID">Tool: <span class="required">*</span></label>
+            <select id="toolID" name="toolID" required>
+                {{#each tools}}
+                <option value="{{this.toolID}}" {{#if (eq this.toolID ../gameTool.toolID)}}selected{{/if}}>{{this.toolName}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <input type="text" id="notes" name="notes" maxlength="255" value="{{gameTool.notes}}">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update Game Tool</button>
+            <a href="/game-tools" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('update-game-tool-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submission will be implemented in Step 4');
+});
+</script>

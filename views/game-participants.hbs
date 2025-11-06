@@ -1,0 +1,43 @@
+<div class="page-header">
+    <a href="/game-participants/add" class="btn btn-primary">Add New Game Participant</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Game Title</th>
+                <th>Participant Name</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.gameParticipantID}}</td>
+                <td>{{this.gameTitle}}</td>
+                <td>{{this.participantName}}</td>
+                <td>{{this.role}}</td>
+                <td class="action-buttons">
+                    <a href="/game-participants/update/{{this.gameParticipantID}}" class="btn btn-small btn-edit">Update</a>
+                    <button class="btn btn-small btn-delete" onclick="deleteGameParticipant({{this.gameParticipantID}})">Delete</button>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="no-data">No game participants found. <a href="/game-participants/add">Add one now</a>.</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function deleteGameParticipant(gameParticipantID) {
+    if (confirm('Are you sure you want to remove this participant from the game?')) {
+        alert('Delete functionality will be implemented in Step 4');
+    }
+}
+</script>

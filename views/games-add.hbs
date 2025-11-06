@@ -1,0 +1,59 @@
+<div class="form-container">
+    <form id="add-game-form" method="POST" action="/games/add">
+        <div class="form-group">
+            <label for="gameTitle">Game Title: <span class="required">*</span></label>
+            <input type="text" id="gameTitle" name="gameTitle" required maxlength="150">
+        </div>
+
+        <div class="form-group">
+            <label for="jamID">Game Jam: <span class="required">*</span></label>
+            <select id="jamID" name="jamID" required>
+                <option value="">-- Select a Game Jam --</option>
+                {{#each jams}}
+                <option value="{{this.jamID}}">{{this.jamName}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="engine">Game Engine:</label>
+            <input type="text" id="engine" name="engine" maxlength="80" placeholder="e.g., Unity, Godot, Unreal">
+        </div>
+
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre" maxlength="80" placeholder="e.g., Platformer, Puzzle, Action">
+        </div>
+
+        <div class="form-group">
+            <label for="submissionURL">Submission URL:</label>
+            <input type="url" id="submissionURL" name="submissionURL" maxlength="255" placeholder="https://example.com/game">
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="Submitted" selected>Submitted</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="score">Score (0-10):</label>
+            <input type="number" id="score" name="score" min="0" max="10" step="0.1" placeholder="e.g., 8.5">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Game</button>
+            <a href="/games" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('add-game-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submission will be implemented in Step 4');
+});
+</script>

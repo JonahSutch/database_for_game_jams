@@ -1,0 +1,40 @@
+<div class="form-container">
+    <form id="add-game-participant-form" method="POST" action="/game-participants/add">
+        <div class="form-group">
+            <label for="gameID">Game: <span class="required">*</span></label>
+            <select id="gameID" name="gameID" required>
+                <option value="">-- Select a Game --</option>
+                {{#each games}}
+                <option value="{{this.gameID}}">{{this.gameTitle}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="participantID">Participant: <span class="required">*</span></label>
+            <select id="participantID" name="participantID" required>
+                <option value="">-- Select a Participant --</option>
+                {{#each participants}}
+                <option value="{{this.participantID}}">{{this.firstName}} {{this.lastName}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role: <span class="required">*</span></label>
+            <input type="text" id="role" name="role" required maxlength="80" placeholder="e.g., Programmer, Artist, Designer">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Game Participant</button>
+            <a href="/game-participants" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('add-game-participant-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submission will be implemented in Step 4');
+});
+</script>

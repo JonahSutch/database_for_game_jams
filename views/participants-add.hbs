@@ -1,0 +1,40 @@
+<div class="form-container">
+    <form id="add-participant-form" method="POST" action="/participants/add">
+        <div class="form-group">
+            <label for="firstName">First Name: <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" required maxlength="80">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name: <span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" required maxlength="80">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email: <span class="required">*</span></label>
+            <input type="email" id="email" name="email" required maxlength="255">
+        </div>
+
+        <div class="form-group">
+            <label for="handle">Handle/Username:</label>
+            <input type="text" id="handle" name="handle" maxlength="60" placeholder="e.g., @username">
+        </div>
+
+        <div class="form-group">
+            <label for="skills">Skills:</label>
+            <input type="text" id="skills" name="skills" maxlength="250" placeholder="e.g., Programming, 2D Art, Sound Design">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Add Participant</button>
+            <a href="/participants" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+<script>
+document.getElementById('add-participant-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Form submission will be implemented in Step 4');
+});
+</script>

@@ -1,0 +1,50 @@
+<div class="page-header">
+    <a href="/jams/add" class="btn btn-primary">Add New Game Jam</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Jam ID</th>
+                <th>Jam Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Location</th>
+                <th>Max Team Size</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.jamID}}</td>
+                <td>{{this.jamName}}</td>
+                <td>{{this.startDate}}</td>
+                <td>{{this.endDate}}</td>
+                <td>{{this.location}}</td>
+                <td>{{this.maxTeamSize}}</td>
+                <td>{{this.createdAt}}</td>
+                <td class="action-buttons">
+                    <a href="/jams/update/{{this.jamID}}" class="btn btn-small btn-edit">Update</a>
+                    <button class="btn btn-small btn-delete" onclick="deleteJam({{this.jamID}})">Delete</button>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="8" class="no-data">No game jams found. <a href="/jams/add">Add one now</a>.</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function deleteJam(jamID) {
+    if (confirm('Are you sure you want to delete this game jam? This will also delete all associated teams and games.')) {
+        // Delete functionality will be implemented in later steps
+        alert('Delete functionality will be implemented in Step 4');
+    }
+}
+</script>

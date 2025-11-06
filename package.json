@@ -1,0 +1,21 @@
+{
+  "name": "indie-game-jam-manager",
+  "version": "1.0.0",
+  "description": "Indie Game Jam Manager - CS340 Database Project",
+  "main": "app.js",
+  "scripts": {
+    "development": "npx nodemon app.js",
+    "production": "npx forever start app.js",
+    "stop_production": "npx forever stop app.js"
+  },
+  "keywords": ["database", "game-jam", "express", "handlebars"],
+  "author": "Group 17 - Rehjii Martin & Jonah Sutch",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "mysql2": "^3.12.0",
+    "forever": "^4.0.3",
+    "nodemon": "^3.1.9"
+  }
+}

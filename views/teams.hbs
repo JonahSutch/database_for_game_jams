@@ -1,0 +1,43 @@
+<div class="page-header">
+    <a href="/teams/add" class="btn btn-primary">Add New Team</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Game Jam</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <td>{{this.teamID}}</td>
+                <td>{{this.teamName}}</td>
+                <td>{{this.jamName}}</td>
+                <td>{{this.createdAt}}</td>
+                <td class="action-buttons">
+                    <a href="/teams/update/{{this.teamID}}" class="btn btn-small btn-edit">Update</a>
+                    <button class="btn btn-small btn-delete" onclick="deleteTeam({{this.teamID}})">Delete</button>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="no-data">No teams found. <a href="/teams/add">Add one now</a>.</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function deleteTeam(teamID) {
+    if (confirm('Are you sure you want to delete this team?')) {
+        alert('Delete functionality will be implemented in Step 4');
+    }
+}
+</script>
