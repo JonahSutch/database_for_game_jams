@@ -9,7 +9,7 @@
     "stop_production": "npx forever stop app.js"
   },
   "keywords": ["database", "game-jam", "express", "handlebars"],
-  "author": "Group 17 - Rehjii Martin & Jonah Sutch",
+  "author": "Group 73 - Rehjii Martin & Jonah Sutch",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
