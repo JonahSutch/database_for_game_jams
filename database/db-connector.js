@@ -1,6 +1,6 @@
 /*
  * Database Connection Module
- * CS340 Group 17 - Rehjii Martin & Jonah Sutch
+ * CS340 Group 73 - Rehjii Martin & Jonah Sutch
  */
 
 // Get an instance of mysql we can use in the app

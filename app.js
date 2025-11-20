@@ -1,6 +1,6 @@
 /*
  * Indie Game Jam Manager - Main Application
- * CS340 Group 17 - Rehjii Martin & Jonah Sutch
+ * CS340 Group 73 - Rehjii Martin & Jonah Sutch
  */
 
 /*
@@ -10,7 +10,7 @@
 // Express
 const express = require('express');   // We are using the express library for the web server
 const app = express();                // We need to instantiate an express object to interact with the server in our code
-const PORT = 9124;                    // Set a port number at the top so it's easy to change
+const PORT = 3399;                    // Set a port number at the top so it's easy to change
 
 // Handlebars setup
 const { engine } = require('express-handlebars');
