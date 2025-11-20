@@ -19,6 +19,7 @@
                 <li><a href="/tools">Tools</a></li>
                 <li><a href="/game-participants">Game Participants</a></li>
                 <li><a href="/game-tools">Game Tools</a></li>
+                <li><button id="reset-db-btn" class="reset-btn">RESET DATABASE</button></li>
             </ul>
         </div>
     </nav>
@@ -31,5 +32,32 @@
     <footer>
         <p>&copy; 2025 CS340 Group 73 - Rehjii Martin & Jonah Sutch</p>
     </footer>
+
+    <script>
+        // RESET DATABASE button functionality
+        document.getElementById('reset-db-btn').addEventListener('click', function() {
+            if (confirm('WARNING: This will delete ALL data and reset the database to its initial state. Are you sure you want to continue?')) {
+                fetch('/reset-database', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Database reset successfully! The page will now reload.');
+                        window.location.reload();
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while resetting the database.');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

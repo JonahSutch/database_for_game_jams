@@ -1,6 +1,6 @@
 /*
  * Indie Game Jam Manager - Main Stylesheet
- * CS340 Group 17 - Rehjii Martin & Jonah Sutch
+ * CS340 Group 73 - Rehjii Martin & Jonah Sutch
  */
 
 /* ============================================================================
@@ -86,6 +86,24 @@ body {
 
 .nav-menu li a:hover {
     background-color: var(--secondary-color);
+}
+
+/* Reset Database Button in Navigation */
+.reset-btn {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
 }
 
 /* ============================================================================

@@ -840,6 +840,30 @@ app.delete('/game-tools/delete/:id', function(req, res) {
 });
 
 /*
+ * RESET DATABASE ROUTE
+ */
+app.post('/reset-database', function(req, res) {
+    // Call the stored procedure to reset the database
+    const query = "CALL ResetDatabase();";
+
+    db.pool.query(query, function(error, results, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({
+                success: false,
+                message: 'Failed to reset database',
+                error: error.message
+            });
+            return;
+        }
+        res.json({
+            success: true,
+            message: 'Database reset successfully!'
+        });
+    });
+});
+
+/*
  * LISTENER
  */
 app.listen(PORT, function() {
