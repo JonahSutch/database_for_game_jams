@@ -43,8 +43,20 @@
 <script>
 function deleteJam(jamID) {
     if (confirm('Are you sure you want to delete this game jam? This will also delete all associated teams and games.')) {
-        // Delete functionality will be implemented in later steps
-        alert('Delete functionality will be implemented in Step 4');
+        fetch(`/jams/delete/${jamID}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error deleting game jam');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting game jam');
+        });
     }
 }
 </script>

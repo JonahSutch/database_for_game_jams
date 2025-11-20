@@ -1,5 +1,5 @@
 -- Indie Game Jam Manager (IGJM)
--- CS340 Step 2 Draft / Group 17
+-- CS340 Step 2 Draft / Group 73
 -- Rehjii Martin & Jonah Sutch
 
 SET FOREIGN_KEY_CHECKS = 0;

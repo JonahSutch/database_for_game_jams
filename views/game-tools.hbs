@@ -37,7 +37,20 @@
 <script>
 function deleteGameTool(gameToolID) {
     if (confirm('Are you sure you want to remove this tool from the game?')) {
-        alert('Delete functionality will be implemented in Step 4');
+        fetch(`/game-tools/delete/${gameToolID}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error deleting game tool');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting game tool');
+        });
     }
 }
 </script>

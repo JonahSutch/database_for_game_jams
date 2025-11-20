@@ -37,7 +37,20 @@
 <script>
 function deleteGameParticipant(gameParticipantID) {
     if (confirm('Are you sure you want to remove this participant from the game?')) {
-        alert('Delete functionality will be implemented in Step 4');
+        fetch(`/game-participants/delete/${gameParticipantID}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error deleting game participant');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting game participant');
+        });
     }
 }
 </script>

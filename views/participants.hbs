@@ -41,7 +41,20 @@
 <script>
 function deleteParticipant(participantID) {
     if (confirm('Are you sure you want to delete this participant?')) {
-        alert('Delete functionality will be implemented in Step 4');
+        fetch(`/participants/delete/${participantID}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error deleting participant');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting participant');
+        });
     }
 }
 </script>

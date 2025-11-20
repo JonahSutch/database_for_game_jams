@@ -51,7 +51,20 @@
 <script>
 function deleteGame(gameID) {
     if (confirm('Are you sure you want to delete this game?')) {
-        alert('Delete functionality will be implemented in Step 4');
+        fetch(`/games/delete/${gameID}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                location.reload();
+            } else {
+                alert('Error deleting game');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error deleting game');
+        });
     }
 }
 </script>

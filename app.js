@@ -443,6 +443,403 @@ app.get('/game-tools/update/:id', function(req, res) {
 });
 
 /*
+ * POST ROUTES - CREATE Operations
+ */
+
+// Add new Jam
+app.post('/jams/add', function(req, res) {
+    const query = "INSERT INTO Jams (jamName, startDate, endDate, location, maxTeamSize) VALUES (?, ?, ?, ?, ?);";
+    const values = [
+        req.body.jamName,
+        req.body.startDate,
+        req.body.endDate,
+        req.body.location || null,
+        parseInt(req.body.maxTeamSize)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/jams');
+    });
+});
+
+// Add new Participant
+app.post('/participants/add', function(req, res) {
+    const query = "INSERT INTO Participants (firstName, lastName, email, handle, skills) VALUES (?, ?, ?, ?, ?);";
+    const values = [
+        req.body.firstName,
+        req.body.lastName,
+        req.body.email,
+        req.body.handle || null,
+        req.body.skills || null
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/participants');
+    });
+});
+
+// Add new Team
+app.post('/teams/add', function(req, res) {
+    const query = "INSERT INTO Teams (teamName, jamID) VALUES (?, ?);";
+    const values = [
+        req.body.teamName,
+        parseInt(req.body.jamID)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/teams');
+    });
+});
+
+// Add new Game
+app.post('/games/add', function(req, res) {
+    const query = "INSERT INTO Games (jamID, gameTitle, engine, genre, submissionURL, status, score) VALUES (?, ?, ?, ?, ?, ?, ?);";
+    const values = [
+        parseInt(req.body.jamID),
+        req.body.gameTitle,
+        req.body.engine || null,
+        req.body.genre || null,
+        req.body.submissionURL || null,
+        req.body.status || 'Submitted',
+        req.body.score ? parseFloat(req.body.score) : null
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/games');
+    });
+});
+
+// Add new Tool
+app.post('/tools/add', function(req, res) {
+    const query = "INSERT INTO Tools (toolName, toolType, sourceURL) VALUES (?, ?, ?);";
+    const values = [
+        req.body.toolName,
+        req.body.toolType || null,
+        req.body.sourceURL || null
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/tools');
+    });
+});
+
+// Add new Game Participant
+app.post('/game-participants/add', function(req, res) {
+    const query = "INSERT INTO GameParticipants (gameID, participantID, role) VALUES (?, ?, ?);";
+    const values = [
+        parseInt(req.body.gameID),
+        parseInt(req.body.participantID),
+        req.body.role
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/game-participants');
+    });
+});
+
+// Add new Game Tool
+app.post('/game-tools/add', function(req, res) {
+    const query = "INSERT INTO GameTools (gameID, toolID, notes) VALUES (?, ?, ?);";
+    const values = [
+        parseInt(req.body.gameID),
+        parseInt(req.body.toolID),
+        req.body.notes || null
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/game-tools');
+    });
+});
+
+/*
+ * POST ROUTES - UPDATE Operations
+ */
+
+// Update Jam
+app.post('/jams/update/:id', function(req, res) {
+    const query = "UPDATE Jams SET jamName = ?, startDate = ?, endDate = ?, location = ?, maxTeamSize = ? WHERE jamID = ?;";
+    const values = [
+        req.body.jamName,
+        req.body.startDate,
+        req.body.endDate,
+        req.body.location || null,
+        parseInt(req.body.maxTeamSize),
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/jams');
+    });
+});
+
+// Update Participant
+app.post('/participants/update/:id', function(req, res) {
+    const query = "UPDATE Participants SET firstName = ?, lastName = ?, email = ?, handle = ?, skills = ? WHERE participantID = ?;";
+    const values = [
+        req.body.firstName,
+        req.body.lastName,
+        req.body.email,
+        req.body.handle || null,
+        req.body.skills || null,
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/participants');
+    });
+});
+
+// Update Team
+app.post('/teams/update/:id', function(req, res) {
+    const query = "UPDATE Teams SET teamName = ?, jamID = ? WHERE teamID = ?;";
+    const values = [
+        req.body.teamName,
+        parseInt(req.body.jamID),
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/teams');
+    });
+});
+
+// Update Game
+app.post('/games/update/:id', function(req, res) {
+    const query = "UPDATE Games SET jamID = ?, gameTitle = ?, engine = ?, genre = ?, submissionURL = ?, status = ?, score = ? WHERE gameID = ?;";
+    const values = [
+        parseInt(req.body.jamID),
+        req.body.gameTitle,
+        req.body.engine || null,
+        req.body.genre || null,
+        req.body.submissionURL || null,
+        req.body.status || 'Submitted',
+        req.body.score ? parseFloat(req.body.score) : null,
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/games');
+    });
+});
+
+// Update Tool
+app.post('/tools/update/:id', function(req, res) {
+    const query = "UPDATE Tools SET toolName = ?, toolType = ?, sourceURL = ? WHERE toolID = ?;";
+    const values = [
+        req.body.toolName,
+        req.body.toolType || null,
+        req.body.sourceURL || null,
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/tools');
+    });
+});
+
+// Update Game Participant
+app.post('/game-participants/update/:id', function(req, res) {
+    const query = "UPDATE GameParticipants SET gameID = ?, participantID = ?, role = ? WHERE gameParticipantID = ?;";
+    const values = [
+        parseInt(req.body.gameID),
+        parseInt(req.body.participantID),
+        req.body.role,
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/game-participants');
+    });
+});
+
+// Update Game Tool
+app.post('/game-tools/update/:id', function(req, res) {
+    const query = "UPDATE GameTools SET gameID = ?, toolID = ?, notes = ? WHERE gameToolID = ?;";
+    const values = [
+        parseInt(req.body.gameID),
+        parseInt(req.body.toolID),
+        req.body.notes || null,
+        parseInt(req.params.id)
+    ];
+
+    db.pool.query(query, values, function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+            return;
+        }
+        res.redirect('/game-tools');
+    });
+});
+
+/*
+ * DELETE ROUTES
+ */
+
+// Delete Jam
+app.delete('/jams/delete/:id', function(req, res) {
+    const query = "DELETE FROM Jams WHERE jamID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete jam' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Participant
+app.delete('/participants/delete/:id', function(req, res) {
+    const query = "DELETE FROM Participants WHERE participantID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete participant' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Team
+app.delete('/teams/delete/:id', function(req, res) {
+    const query = "DELETE FROM Teams WHERE teamID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete team' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Game
+app.delete('/games/delete/:id', function(req, res) {
+    const query = "DELETE FROM Games WHERE gameID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete game' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Tool
+app.delete('/tools/delete/:id', function(req, res) {
+    const query = "DELETE FROM Tools WHERE toolID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete tool' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Game Participant
+app.delete('/game-participants/delete/:id', function(req, res) {
+    const query = "DELETE FROM GameParticipants WHERE gameParticipantID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete game participant' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+// Delete Game Tool
+app.delete('/game-tools/delete/:id', function(req, res) {
+    const query = "DELETE FROM GameTools WHERE gameToolID = ?;";
+
+    db.pool.query(query, [parseInt(req.params.id)], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.status(500).json({ error: 'Failed to delete game tool' });
+            return;
+        }
+        res.status(204).send();
+    });
+});
+
+/*
  * LISTENER
  */
 app.listen(PORT, function() {
