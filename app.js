@@ -10,7 +10,7 @@
 // Express
 const express = require('express');   // We are using the express library for the web server
 const app = express();                // We need to instantiate an express object to interact with the server in our code
-const PORT = 3397;                    // Set a port number at the top so it's easy to change
+const PORT = 12335;                    // Set a port number at the top so it's easy to change
 
 // Handlebars setup
 const { engine } = require('express-handlebars');
